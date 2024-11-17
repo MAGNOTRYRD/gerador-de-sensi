@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gerador de Configurações - iA SINSI</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e2f;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #2c2c3c;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    }
+
+    h1 {
+      color: #ffab00;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    input, select {
+      background: #3a3a4a;
+      color: #fff;
+    }
+
+    button {
+      background-color: #ffab00;
+      color: #1e1e2f;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff8800;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      padding: 20px;
+      background: #ffab00;
+      color: #1e1e2f;
+      border-radius: 10px;
+      display: none;
+    }
+
+    .headtrick-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 12px 25px;
+      background: #ff4500;
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+      text-transform: uppercase;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .headtrick-btn:hover {
+      background: #cc3700;
+    }
+
+    footer {
+      margin-top: 30px;
+      color: #fff;
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Gerador de Configurações</h1>
+
+  <div class="container">
+    <label for="marca">Marca do Celular:</label>
+    <select id="marca">
+      <option value="iPhone">iPhone</option>
+      <option value="Samsung">Samsung</option>
+      <option value="Motorola">Motorola</option>
+      <option value="Outros">Outros</option>
+    </select>
+
+    <label for="nivel">Nível de Sensibilidade:</label>
+    <select id="nivel">
+      <option value="Alta">Alta</option>
+      <option value="Media">Média</option>
+      <option value="Baixa">Baixa</option>
+    </select>
+
+    <button onclick="gerarSensibilidade()">Gerar Configuração</button>
+  </div>
+
+  <div id="resultado">
+    <h2>Configurações Geradas:</h2>
+    <p id="configuracoes"></p>
+  </div>
+
+  <div id="melhorar-sensi">
+    <p>Se você quer melhorar mais ainda sua sensi e dar só full vermelho, venha adquirir seu <strong>Headtrick</strong>.</p>
+    <a href="pix.html" class="headtrick-btn">Adquirir  Headtrick</a>
+  </div>
+
+  <footer>
+    Criado por <strong>MAGNO SENSI</strong>
+  </footer>
+
+  <script>
+    const configuracoes = {
+      iPhone: {
+        Alta: "Geral: 188 | Red Dot: 200 | 2x: 197 | 4x: 198 | AWM: 50",
+        Media: "Geral: 80 | Red Dot: 75 | 2x: 70 | 4x: 65 | AWM: 40",
+        Baixa: "Geral: 60 | Red Dot: 55 | 2x: 50 | 4x: 45 | AWM: 30"
+      },
+      Samsung: {
+        Alta: "Geral: 179 | Red Dot: 129| 2x: 163 | 4x: 187 | AWM: 60 | DPI: 600",
+        Media: "Geral: 85 | Red Dot: 80 | 2x: 75 | 4x: 70 | AWM: 50 | DPI: 450",
+        Baixa: "Geral: 70 | Red Dot: 65 | 2x: 60 | 4x: 55 | AWM: 40 | DPI: 300"
+      },
+      Motorola: {
+        Alta: "Geral: 199 | Red Dot: 183 |2x: 142| 4x:164| AWM: 55 | DPI: 700",
+        Media: "Geral: 80 | Red Dot: 75 | 2x: 70 | 4x: 65 | AWM: 45 | DPI: 500",
+        Baixa: "Geral: 65 | Red Dot: 60 | 2x: 55 | 4x: 50 | AWM: 35 | DPI: 300"
+      },
+      Outros: {
+        Alta: "Geral: 90 | Red Dot: 85 | 2x: 80 | 4x: 75 | AWM: 45",
+        Media: "Geral: 75 | Red Dot: 70 | 2x: 65 | 4x: 60 | AWM: 35",
+        Baixa: "Geral: 50 | Red Dot: 45 | 2x: 40 | 4x: 35 | AWM: 20"
+      }
+    };
+
+    function gerarSensibilidade() {
+      const marca = document.getElementById("marca").value;
+      const nivel = document.getElementById("nivel").value;
+
+      const config = configuracoes[marca][nivel];
+      document.getElementById("configuracoes").innerText = config;
+      document.getElementById("resultado").style.display = "block";
+    }
+  </script>
+</body>
+</html>

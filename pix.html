@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pagamento via PIX</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e2f;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #2c2c3c;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    }
+
+    h1 {
+      color: #ffab00;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      margin: 20px 0;
+    }
+
+    .btn-pix {
+      background-color: #ffab00;
+      color: #1e1e2f;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-pix:hover {
+      background-color: #ff8800;
+    }
+
+    #countdown {
+      font-size: 1.5rem;
+      color: red;
+      margin-top: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    footer {
+      margin-top: 30px;
+      color: #fff;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .btn-copy {
+      background-color: #0098f5;
+      color: white;
+      font-weight: bold;
+      padding: 12px 20px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-copy:hover {
+      background-color: #007bb5;
+    }
+
+    .btn-send {
+      background-color: #28a745;
+      color: white;
+      font-weight: bold;
+      padding: 12px 20px;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-send:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+  <h1>Pagamento via PIX</h1>
+
+  <div class ```html
+="container">
+    <p>Por favor, faça o pagamento via PIX para o número abaixo:</p>
+    <p id="pixNumber">65992243279</p>
+
+    <button class="btn-copy" id="copyButton">Copiar número do PIX</button>
+
+    <div id="countdown"></div>
+
+    <p>Se o pagamento for confirmado, clique no botão abaixo para enviar seu comprovante:</p>
+    <button class="btn-send hidden" id="sendButton" onclick="enviarComprovante()">Enviar Comprovante</button>
+
+    <div id="timeoutMessage" class="hidden">
+      <p>Tempo esgotado! O número do Pix será regenerado.</p>
+      <button class="btn-pix" onclick="gerarNovoPix()">Gerar Novo Pix</button>
+    </div>
+  </div>
+
+  <footer>
+    Criado por <strong>MAGNO SENSI</strong>
+  </footer>
+
+  <script>
+    let countdownTime = 9 * 60; // 9 minutos em segundos
+    const pixNumber = "65992243279";
+    const countdownElement = document.getElementById("countdown");
+    const sendButton = document.getElementById("sendButton");
+    const timeoutMessage = document.getElementById("timeoutMessage");
+
+    // Função para iniciar o contador regressivo
+    function startCountdown() {
+      const interval = setInterval(() => {
+        const minutes = Math.floor(countdownTime / 60);
+        const seconds = countdownTime % 60;
+        countdownElement.textContent = `Tempo restante: ${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+        countdownTime--;
+
+        if (countdownTime < 0) {
+          clearInterval(interval);
+          timeoutMessage.style.display = "block"; // Exibe a mensagem de tempo esgotado
+        }
+      }, 1000);
+    }
+
+    // Função para enviar o comprovante
+    function enviarComprovante() {
+      window.location.href = "https://w.app/Ty5EgZ?text=Oi%20quero%20comprar%20gerador%20de%20sensi"; 
+    }
+
+    // Função para gerar um novo número do Pix (em caso de timeout)
+    function gerarNovoPix() {
+      document.getElementById("pixNumber").textContent = "65992243279"; // Regenera o número original
+      timeoutMessage.style.display = "none"; // Esconde a mensagem de timeout
+      startCountdown(); // Reinicia o contador
+    }
+
+    // Função para copiar o número do PIX
+    document.getElementById("copyButton").addEventListener("click", function() {
+      const pixNumberText = document.getElementById("pixNumber").textContent;
+      navigator.clipboard.writeText(pixNumberText)
+        .then(() => {
+          alert("Número do Pix copiado para a área de transferência!");
+        })
+        .catch(err => {
+          alert("Falha ao copiar número do Pix. Tente novamente.");
+        });
+    });
+
+    // Função para mostrar o botão de enviar comprovante
+    function pagamentoConfirmado() {
+      sendButton.classList.remove("hidden"); // Mostra o botão
+    }
+
+    // Inicia o contador quando a página carrega
+    window.onload = startCountdown;
+  </script>
+</body>

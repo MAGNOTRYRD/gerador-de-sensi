@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validação de Código</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #1e1e2f;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: #2c2c3c;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    }
+
+    h1 {
+      color: #ffab00;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    input {
+      background: #3a3a4a;
+      color: #fff;
+    }
+
+    button {
+      background-color: #ffab00;
+      color: #1e1e2f;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff8800;
+    }
+
+    #resultado {
+      margin-top: 20px;
+      padding: 20px;
+      background: #ffab00;
+      color: #1e1e2f;
+      border-radius: 10px;
+      display: none; /* Inicialmente escondido */
+    }
+
+    footer {
+      margin-top: 30px;
+      color: #fff;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    .btn-gerar, .btn-acesso {
+      background-color: #ffab00;
+      color: #1e1e2f;
+      padding: 10px 20px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+      display: inline-block;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-gerar:hover, .btn-acesso:hover {
+      background-color: #ff8800;
+    }
+  </style>
+</head>
+<body>
+  <h1>Valide seu Código</h1>
+
+  <div class="container">
+    <label for="codigo">Digite o código único que você recebeu:</label>
+    <input type="text" id="codigo" placeholder="Código único">
+    
+    <button onclick="validarCodigo()">Validar Código</button>
+  </div>
+
+  <div id="resultado">
+    <h2>Código Validado com Sucesso!</h2>
+    <p>Agora, você pode acessar o Gerador de Configurações.</p>
+    <a href="gerador.html" class="btn-gerar">Ir para o Gerador</a>
+  </div>
+
+  <div>
+    <a href="https://www.instagram.com/magno_sensi?igsh=MXZ2cjdzd2pnam02NA==" class="btn-acesso">Venha adquirir seu acesso</a>
+  </div>
+
+  <footer>
+    Criado por <strong>MAGNO SENSI</strong>
+  </footer>
+
+  <script>
+    const codigosValidos = ["123456", "654321", "987654", "112233", "445566"];
+    const codigosUsados = JSON.parse(localStorage.getItem('codigosUsados')) || [];
+
+    function validarCodigo() {
+      const codigoInserido = document.getElementById("codigo").value.trim(); // Remove espaços em branco
+
+      // Verifica se o código já foi utilizado
+      if (codigosUsados.includes(codigoInserido)) {
+        alert("Código já utilizado! Tente um código diferente.");
+        return;
+      }
+
+      // Verifica se o código inserido é válido
+      if (codigosValidos.includes(codigoInserido)) {
+        codigosUsados.push(codigoInserido);
+        localStorage.setItem('codigosUsados', JSON.stringify(codigosUsados));
+        document.getElementById("resultado"). style.display = "block"; // Exibe a mensagem de sucesso
+      } else {
+        alert("Código inválido! Tente novamente.");
+      }
+    }
+  </script>
+</body>
+</html>
